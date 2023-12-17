@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'Users.apps.UsersConfig',
     # Third party Packages:
     'rest_framework.authtoken',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -139,4 +141,12 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication'
     ]
+}
+
+CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor'
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full'
+    }
 }
