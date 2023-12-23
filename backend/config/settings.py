@@ -143,7 +143,7 @@ REST_FRAMEWORK = {
     ]
 }
 
-CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor'
+CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/'
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_CONFIGS = {
     'default': {

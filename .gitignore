@@ -14,7 +14,8 @@ env
 backend/venv
 .idea
 admin
-
+backend/static
+backend/staticfiles
 
 ### Django.Python Stack ###
 # Byte-compiled / optimized / DLL files
