@@ -6,7 +6,10 @@ import createCache from '@emotion/cache'
 import { prefixer } from 'stylis'
 
 const theme = createTheme({
-    direction: "rtl"
+    direction: "rtl",
+    typography: {
+        fontFamily: "vazir, roboto"
+    }
 })
 
 const cacheRTL = createCache({
