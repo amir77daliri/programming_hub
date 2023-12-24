@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Project Apps:
     'Users.apps.UsersConfig',
+    'competitions.apps.CompetitionsConfig',
+    'problemset.apps.ProblemsetConfig',
     # Third party Packages:
     'rest_framework.authtoken',
     'ckeditor',
@@ -114,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 

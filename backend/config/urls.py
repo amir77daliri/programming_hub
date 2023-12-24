@@ -6,7 +6,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('Users.urls')),
-    path('ckeditor/', include('ckeditor_uploader.urls'))
+    path('problemset/', include('problemset.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
 if settings.DEBUG:
