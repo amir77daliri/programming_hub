@@ -27,8 +27,17 @@ def login(request):
     print('data ', request.data)
     serializer = LoginSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
-    token, created = Token.objects.get_or_create(user=serializer.validated_data['user'])
-    response = {
-        'token': str(token)
-    }
-    return Response(response, status=status.HTTP_200_OK)
+    user = serializer.validated_data.get('user', None)
+    if user is not None:
+        token, created = Token.objects.get_or_create(user=user)
+        response = {
+            'msg': 'success',
+            'id': user.id,
+            'email': user.email,
+            'name': user.get_full_name(),
+            'role': 'admin' if user.is_staff else 'user',
+            'token': str(token)
+        }
+        return Response(response, status=status.HTTP_200_OK)
+
+    return Response({'msg': 'ایمیل یا رمز عبور اشتباه است !'}, status=status.HTTP_400_BAD_REQUEST)

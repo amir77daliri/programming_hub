@@ -1,9 +1,12 @@
 from django.db import models
-from ckeditor_uploader.fields import RichTextUploadingField
+# from ckeditor_uploader.fields import RichTextUploadingField
+from markdownx.models import MarkdownxField
 from competitions.models import Contest
-from Users.models import User
+from django.contrib.auth import get_user_model
 import os
 import uuid
+
+User = get_user_model()
 
 
 def custom_upload_to(instance, filename):
@@ -50,18 +53,19 @@ class Categories(models.Model):
 
 class Questions(models.Model):
     LEVEL_CHOICES = [
-        ('easy', 'ساده'),
-        ('moderate', 'متوسط'),
-        ('hard', 'سخت')
+        ('ساده', 'ساده'),
+        ('متوسط', 'متوسط'),
+        ('سخت', 'سخت')
     ]
     title = models.CharField(max_length=266)
-    content = RichTextUploadingField()
+    content = MarkdownxField(null=True)
     level = models.CharField(max_length=8, choices=LEVEL_CHOICES)
     score = models.PositiveIntegerField(default=100)
     initial_project = models.FileField(upload_to=custom_upload_to, blank=True, null=True)
     count_of_solved = models.IntegerField(default=0)
+    is_public = models.BooleanField(default=False, blank=True)
     # Relations :
-    contest = models.ForeignKey(Contest, related_name='questions', on_delete=models.SET_NULL, null=True, default=None)
+    contest = models.ForeignKey(Contest, related_name='questions', on_delete=models.SET_NULL, blank=True, null=True, default=None)
     tags = models.ManyToManyField(Tags, related_name='tag_questions', blank=True)
     category = models.ForeignKey(Categories, related_name='category_questions', on_delete=models.SET_NULL, null=True, blank=True)
     code_ln = models.ManyToManyField(ProgrammingLanguages, related_name='language_questions')
@@ -71,6 +75,7 @@ class Questions(models.Model):
     class Meta:
         verbose_name = 'سوال'
         verbose_name_plural = 'سوالات'
+        ordering = ['-created_at']
 
     def __str__(self):
         return self.title
@@ -93,3 +98,7 @@ class Answers(models.Model):
         verbose_name_plural = 'تمامی ارسال ها'
 
 
+class TestCases(models.Model):
+    question = models.ForeignKey(Questions, related_name='test_cases', on_delete=models.CASCADE)
+    input = models.CharField(max_length=255)
+    output = models.CharField(max_length=255)

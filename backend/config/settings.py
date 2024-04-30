@@ -28,7 +28,8 @@ AUTH_USER_MODEL = 'Users.User'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Application definition
@@ -46,13 +47,16 @@ INSTALLED_APPS = [
     'problemset.apps.ProblemsetConfig',
     # Third party Packages:
     'rest_framework.authtoken',
-    'ckeditor',
-    'ckeditor_uploader',
+    'markdownx',
+    # 'ckeditor',
+    # 'ckeditor_uploader',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -79,7 +83,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -114,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa-ir'
 
 TIME_ZONE = 'Asia/Tehran'
 
@@ -145,10 +148,30 @@ REST_FRAMEWORK = {
     ]
 }
 
-CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/'
-CKEDITOR_UPLOAD_PATH = 'uploads/'
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'full'
-    }
-}
+MARKDOWNX_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.extra'
+]
+
+# CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/'
+# CKEDITOR_UPLOAD_PATH = 'uploads/'
+#
+# CKEDITOR_CONFIGS = {
+#     'default': {
+#         'skin': 'moono',
+#         'allowedContent': True,
+#         'codeSnippet_theme': 'monokai',
+#         'toolbar': 'all',
+#         'extraPlugins': ','.join(
+#             [
+#                 'codesnippet',
+#                 'widget',
+#                 'dialog'
+#             ]
+#         )
+#     }
+# }
+
+
+
+
+

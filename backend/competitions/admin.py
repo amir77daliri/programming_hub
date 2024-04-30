@@ -4,11 +4,15 @@ from utils.date_converter import jalali_converter
 
 
 class ContestAdmin(admin.ModelAdmin):
-    list_display = ('name_persian', 'start_date_persian', 'duration_persian', 'status_persian')
+    list_display = ('name_persian', 'q_count_persian', 'start_date_persian', 'duration_persian', 'status_persian')
 
     def duration_persian(self, obj):
         return f'{obj.duration} دقیقه'
     duration_persian.short_description = 'مدت مسابقه'
+
+    def q_count_persian(self, obj):
+        return f'{obj.q_count}'
+    q_count_persian.short_description = 'تعداد سوالات'
 
     def start_date_persian(self, obj):
         return jalali_converter(obj.start_date)

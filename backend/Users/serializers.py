@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import User
+from django.contrib.auth import authenticate
 from django.contrib.auth.password_validation import validate_password as password_validation
 
 
@@ -28,9 +29,9 @@ class LoginSerializer(serializers.Serializer):
     def validate(self, attrs):
         email = attrs['email']
         password = attrs['password']
-        user = User.objects.filter(email=email, password=password).first()
+        user = authenticate(email=email, password=password)
         if user is not None:
             attrs['user'] = user
             return attrs
         else:
-            raise serializers.ValidationError('ایمیل یا رمز عبور اشتباه است.')
+            return attrs
