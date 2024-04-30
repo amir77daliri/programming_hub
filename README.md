@@ -1,0 +1,3 @@
+This project is to show programming questions to users.
+The backend of the project is developed with Django and the frontend is developed with React.
+DRF and Restful architecture have been used for communication between backend and frontend, and the important point in implementing the question text part is to use Markdown to display the content of the questions as well as images or tables and...
